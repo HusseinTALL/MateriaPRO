@@ -1,0 +1,16 @@
+{
+  "name": "materiapro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "animejs": "^3.2.2",
+    "astro": "^7.1.1",
+    "lucide": "^1.25.0"
+  }
+}

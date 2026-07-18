@@ -142,7 +142,12 @@ ul, ol { list-style: none; }
   width: 2.6rem;
   height: 1px;
   background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s var(--ease-out) 0.2s;
 }
+.eyebrow.is-revealed::before { transform: scaleX(1); }
+.no-js .eyebrow::before { transform: none; }
 .eyebrow--light { color: var(--gold-soft); }
 
 .lead {
@@ -433,6 +438,21 @@ ul, ol { list-style: none; }
 .steel-strip {
   display: flex;
   height: 3px;
+  position: relative;
+  overflow: hidden;
+}
+/* Reflet métallique périodique sur le bandeau */
+.steel-strip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  transform: translateX(-100%);
+  animation: stripSheen 7s ease-in-out infinite;
+}
+@keyframes stripSheen {
+  0%, 55% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 .steel-strip__c { flex: 1; }
 .steel-strip__c--red   { background: var(--tole-red); }
@@ -498,6 +518,12 @@ ul, ol { list-style: none; }
 .hero__bg img {
   width: 100%; height: 100%;
   object-fit: cover;
+  /* Ken Burns très lent : le fond respire */
+  animation: kenburns 28s ease-in-out infinite alternate;
+}
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.09); }
 }
 .hero__overlay {
   position: absolute;
@@ -700,8 +726,12 @@ ul, ol { list-style: none; }
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(95, 106, 117, 0.3), transparent);
+  transform: scaleX(0);
   transform-origin: center;
+  transition: transform 1.2s var(--ease-out);
 }
+.divider.is-revealed span { transform: scaleX(1); }
+.no-js .divider span { transform: none; }
 
 /* ── 11. À propos ────────────────────────────────────────────── */
 .about__points { display: grid; gap: 1.6rem; margin-top: 0.6rem; }
@@ -1334,4 +1364,95 @@ ul, ol { list-style: none; }
   outline: 2px solid var(--gold);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* ── 26. Couche d'animations enrichies ───────────────────────── */
+
+/* Titres découpés mot à mot (le JS pose .split-word quand il anime) */
+.split-word { display: inline-block; }
+
+/* Formes flottantes du héro — décor discret, desktop */
+.hero__shapes { position: absolute; inset: 0; pointer-events: none; }
+.hero__shape { position: absolute; display: block; }
+.hero__shape--ring {
+  width: 110px; height: 110px;
+  right: 11%; top: 22%;
+  border: 1px solid rgba(224, 180, 90, 0.35);
+  border-radius: 50%;
+}
+.hero__shape--square {
+  width: 58px; height: 58px;
+  right: 26%; bottom: 26%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transform: rotate(18deg);
+}
+.hero__shape--dot {
+  width: 10px; height: 10px;
+  left: 56%; top: 17%;
+  border-radius: 50%;
+  background: rgba(200, 146, 26, 0.55);
+  box-shadow: 0 0 18px rgba(200, 146, 26, 0.5);
+}
+@media (max-width: 1080px) { .hero__shapes { display: none; } }
+
+/* Fil conducteur du processus — se dessine au fil du scroll */
+.process__list { position: relative; }
+.process__track {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(30, 60, 110, 0.1);
+}
+.process__track span {
+  display: block;
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, var(--gold), var(--gold-soft));
+  transform: scaleY(0);
+  transform-origin: top;
+  will-change: transform;
+}
+.process__step.is-passed .process__num { color: var(--gold); }
+
+/* Tiret doré sous chaque statistique */
+.stat::after {
+  content: "";
+  display: block;
+  width: 36px; height: 3px;
+  margin: 1rem auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  transform: scaleX(0);
+  transition: transform 0.7s var(--ease-out) 0.55s;
+}
+.stat.is-revealed::after { transform: scaleX(1); }
+.no-js .stat::after { transform: none; }
+
+/* Icônes des cartes : léger sursaut au survol */
+.card > svg, .card i, .service-card > svg, .product-card__body > svg,
+.quote-card > svg, .glass-card > svg {
+  transition: transform 0.5s var(--ease-out);
+}
+.card:hover > svg, .card:hover i,
+.service-card:hover > svg, .quote-card:hover > svg,
+.product-card:hover .product-card__body > svg,
+.glass-card:hover > svg {
+  transform: translateY(-3px) scale(1.12) rotate(-4deg);
+}
+
+/* Flèches des boutons : nudge directionnel */
+.btn svg { transition: transform 0.4s var(--ease-out); }
+.btn:hover svg { transform: translate(2px, -2px); }
+
+/* Les visuels éditoriaux « se posent » lors de leur révélation */
+html:not(.no-js) figure[data-reveal]:not(.is-revealed) .media-frame img {
+  transform: scale(1.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow::before, .divider span, .stat::after,
+  .process__track span, .split-word {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .hero__shapes { display: none; }
 }

@@ -1,0 +1,54 @@
+---
+const services = [
+  {
+    icon: "file-text",
+    title: "Devis rapide",
+    text: "Réponse structurée sous 24–48 h, prix transport inclus pour Ouagadougou.",
+  },
+  {
+    icon: "clipboard-check",
+    title: "Contrôle qualité",
+    text: "Checklist par catégorie, photos, verdict conforme, réserves ou non conforme.",
+  },
+  {
+    icon: "route",
+    title: "Livraison organisée",
+    text: "Sur chantier, par zone, avec bon de livraison signé à la réception.",
+  },
+  {
+    icon: "radar",
+    title: "Suivi de commande",
+    text: "Des statuts clairs, de la validation du devis jusqu'à la livraison.",
+  },
+  {
+    icon: "messages-square",
+    title: "Conseil commercial",
+    text: "Aide au choix des produits, des volumes et du planning chantier.",
+  },
+  {
+    icon: "package-open",
+    title: "Échantillons",
+    text: "Sur demande pour les produits sensibles : tôles, profilés, PVC.",
+  },
+];
+---
+
+<!-- ══════════════ 6 · SERVICES ══════════════ -->
+<section class="section services" id="services">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Nos services</p>
+    <h2 class="h2" data-split>Une offre intégrée,<br />au-delà de la vente de produits.</h2>
+
+    <div class="services__grid">
+      {
+        services.map((s) => (
+          <article class="card service-card" data-reveal>
+            <i data-lucide={s.icon}></i>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

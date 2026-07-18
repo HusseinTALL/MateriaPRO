@@ -1,0 +1,63 @@
+---
+const steps = [
+  {
+    title: "Contact & demande de devis",
+    text: "Par téléphone, WhatsApp ou formulaire — décrivez vos besoins.",
+  },
+  {
+    title: "Devis détaillé",
+    text: "Produits, transport et délais — tout compris pour Ouagadougou.",
+  },
+  {
+    title: "Validation & paiement",
+    text: "Comptant ou acompte selon votre profil client.",
+  },
+  {
+    title: "Commande usine & contrôle qualité",
+    text: "Inspection du lot selon la fiche de contrôle qualité (FCQ).",
+  },
+  {
+    title: "Organisation de la livraison",
+    text: "Tournée planifiée, transporteur confirmé, créneau communiqué.",
+  },
+  {
+    title: "Réception sur chantier",
+    text: "Bon de livraison, vérification et signature à la réception.",
+  },
+  {
+    title: "Facturation & suivi",
+    text: "Facture claire et suivi de la relation commerciale dans la durée.",
+  },
+];
+---
+
+<!-- ══════════════ 5 · COMMENT ÇA MARCHE ══════════════ -->
+<section class="section process" id="processus">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow" data-reveal>Le parcours</p>
+        <h2 class="h2" data-split>De votre demande<br />à la réception sur chantier.</h2>
+      </div>
+      <p class="section-head__note" data-reveal>
+        Sept étapes maîtrisées. Les délais sont précisés au cas par cas
+        dans chaque devis, selon le produit et la disponibilité usine.
+      </p>
+    </div>
+
+    <ol class="process__list">
+      <li class="process__track" aria-hidden="true"><span id="processLine"></span></li>
+      {
+        steps.map((s, i) => (
+          <li class="process__step" data-reveal>
+            <span class="process__num">{i + 1}</span>
+            <div>
+              <h3 set:html={s.title}></h3>
+              <p>{s.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

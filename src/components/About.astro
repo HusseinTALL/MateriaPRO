@@ -1,0 +1,64 @@
+---
+const points = [
+  {
+    icon: "badge-check",
+    title: "Indépendance",
+    text: "Nous représentons vos intérêts, pas ceux d'une seule usine.",
+  },
+  {
+    icon: "handshake",
+    title: "Suivi humain",
+    text: "Un interlocuteur dédié, de la demande de devis à la facturation.",
+  },
+  {
+    icon: "map-pin",
+    title: "Ancrage local",
+    text: "Une équipe burkinabè qui connaît le terrain et vos contraintes chantier.",
+  },
+];
+---
+
+<!-- ══════════════ 2 · À PROPOS ══════════════ -->
+<section class="section about" id="apropos">
+  <div class="container grid-2">
+    <div class="about__text">
+      <p class="eyebrow" data-reveal>L'agence</p>
+      <h2 class="h2" data-split>
+        Un intermédiaire de confiance entre les usines et vos chantiers.
+      </h2>
+      <p class="lead" data-reveal>
+        MatériaPro est une agence commerciale indépendante basée à
+        Ouagadougou. Nous ne fabriquons pas : nous sélectionnons,
+        contrôlons, commercialisons et organisons la livraison de vos
+        matériaux — de la commande usine jusqu'à la réception sur chantier.
+      </p>
+      <ul class="about__points" data-reveal>
+        {
+          points.map((p) => (
+            <li>
+              <i data-lucide={p.icon}></i>
+              <div>
+                <strong>{p.title}</strong>
+                <p>{p.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <figure class="about__media" data-reveal>
+      <div class="media-frame">
+        <img
+          src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop"
+          alt="Contrôle qualité en environnement industriel"
+          loading="lazy"
+        />
+      </div>
+      <figcaption class="media-caption">
+        <span class="media-caption__num">FCQ</span>
+        Chaque lot inspecté selon une fiche de contrôle qualité par catégorie.
+      </figcaption>
+    </figure>
+  </div>
+</section>

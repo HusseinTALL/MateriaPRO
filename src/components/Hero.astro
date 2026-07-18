@@ -1,0 +1,72 @@
+---
+const meta = [
+  { icon: "shield-check", label: "Qualité contrôlée à la source" },
+  { icon: "truck", label: "Livraison Ouagadougou & régions" },
+  { icon: "factory", label: "Réseau multi-usines partenaires" },
+];
+---
+
+<!-- ══════════════ 1 · HERO ══════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__bg" id="heroBg">
+    <img
+      src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2400&auto=format&fit=crop"
+      alt="Chantier de construction — charpente métallique au coucher du soleil"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero__overlay"></div>
+    <div class="hero__blueprint" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero__shapes" aria-hidden="true">
+    <span class="hero__shape hero__shape--ring"></span>
+    <span class="hero__shape hero__shape--square"></span>
+    <span class="hero__shape hero__shape--dot"></span>
+  </div>
+
+  <div class="hero__content container">
+    <p class="hero__eyebrow reveal-line">
+      <span class="hero__eyebrow-dot"></span>
+      Agence commerciale · Matériaux de construction · Ouagadougou
+    </p>
+
+    <h1 class="hero__title" aria-label="Vos matériaux. Contrôlés. Livrés.">
+      <span class="hero__line"><span>Vos matériaux.</span></span>
+      <span class="hero__line"><span>Contrôlés.</span></span>
+      <span class="hero__line hero__line--gold"><span>Livrés.</span></span>
+    </h1>
+
+    <p class="hero__sub">
+      Tôles, tubes, PVC, briques et quincaillerie lourde — approvisionnement
+      multi&#8209;usines, contrôle qualité rigoureux et livraison organisée
+      sur chantier, avec un seul interlocuteur.
+    </p>
+
+    <div class="hero__actions">
+      <a href="#contact" class="btn btn--gold btn--lg" data-magnetic>
+        Demander un devis gratuit
+        <i data-lucide="arrow-right"></i>
+      </a>
+      <a href="#processus" class="btn btn--ghost btn--lg" data-magnetic>
+        Comment ça marche
+      </a>
+    </div>
+
+    <div class="hero__meta">
+      {
+        meta.map((m) => (
+          <div class="hero__meta-item">
+            <i data-lucide={m.icon}></i>
+            <span set:html={m.label}></span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <a href="#apropos" class="hero__scroll" aria-label="Faire défiler vers le bas">
+    <span class="hero__scroll-line"></span>
+    Défiler
+  </a>
+</section>

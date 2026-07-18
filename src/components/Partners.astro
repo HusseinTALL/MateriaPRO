@@ -1,0 +1,34 @@
+---
+const marks = [
+  { label: "CMP" },
+  { label: "Usine partenaire" },
+  { label: "Usine partenaire" },
+  { label: "Votre usine ici", gold: true },
+];
+---
+
+<!-- ══════════════ 10 · PARTENAIRES ══════════════ -->
+<section class="section partners" id="partenaires">
+  <div class="container">
+    <div class="partners__inner" data-reveal>
+      <div>
+        <p class="eyebrow" data-reveal>Partenaires industriels</p>
+        <h2 class="h3-title">Le bras commercial des usines locales, sans charge fixe.</h2>
+        <p class="lead">
+          MatériaPro travaille avec CMP et d'autres producteurs partenaires :
+          clientèle BTP qualifiée, encadrement commercial structuré,
+          traçabilité qualité et retours terrain.
+        </p>
+      </div>
+      <div class="partners__logos" aria-label="Usines partenaires">
+        {
+          marks.map((m) => (
+            <span class:list={["partner-mark", { "partner-mark--gold": m.gold }]}>
+              {m.label}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
