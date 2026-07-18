@@ -28,7 +28,7 @@
   --font-body: "Archivo", sans-serif;
 
   /* Échelle */
-  --text-hero: clamp(3.4rem, 9.5vw, 8.5rem);
+  --text-hero: clamp(3.1rem, 9.5vw, 8.5rem);
   --text-h2: clamp(2.2rem, 4.5vw, 4rem);
   --text-h3: clamp(1.35rem, 2vw, 1.7rem);
   --text-lead: clamp(1.05rem, 1.4vw, 1.25rem);
@@ -41,9 +41,10 @@
   /* Détails */
   --radius: 16px;
   --radius-sm: 12px;
-  --shadow-soft: 0 8px 30px rgba(23, 26, 31, 0.06);
-  --shadow-lift: 0 22px 60px rgba(23, 26, 31, 0.12);
+  --shadow-soft: 0 1px 2px rgba(23, 26, 31, 0.04), 0 8px 30px rgba(23, 26, 31, 0.06);
+  --shadow-lift: 0 2px 6px rgba(23, 26, 31, 0.05), 0 22px 60px rgba(23, 26, 31, 0.12);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ── 2. Base ──────────────────────────────────────────────────── */
@@ -51,7 +52,11 @@
 *::before,
 *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Les ancres s'arrêtent sous la navbar fixe */
+  scroll-padding-top: 6.75rem;
+}
 
 body {
   font-family: var(--font-body);
@@ -59,7 +64,24 @@ body {
   background: var(--white);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+::selection {
+  background: var(--navy);
+  color: var(--white);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar { width: 12px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--navy);
+    border: 3px solid var(--surface);
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--navy-deep); }
 }
 
 img { display: block; max-width: 100%; }
@@ -89,6 +111,7 @@ ul, ol { list-style: none; }
   text-transform: uppercase;
   color: var(--navy);
   margin-bottom: 1.5rem;
+  text-wrap: balance;
 }
 .h2--light { color: var(--white); }
 
@@ -127,6 +150,7 @@ ul, ol { list-style: none; }
   color: var(--steel);
   max-width: 56ch;
   margin-bottom: 2rem;
+  text-wrap: pretty;
 }
 .lead--light { color: rgba(255, 255, 255, 0.82); margin-inline: auto; }
 
@@ -151,6 +175,21 @@ ul, ol { list-style: none; }
 }
 .btn i, .btn svg { width: 18px; height: 18px; }
 .btn--lg { padding: 1.15rem 2.4rem; font-size: 1.15rem; }
+
+/* Reflet balayant au survol */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.3) 50%, transparent 60%);
+  transform: translateX(-130%) skewX(-14deg);
+  pointer-events: none;
+}
+.btn:hover::after {
+  transform: translateX(130%) skewX(-14deg);
+  transition: transform 0.9s var(--ease-out);
+}
+.btn:active { transform: translateY(0) scale(0.97); transition-duration: 0.15s; }
 
 .btn--gold {
   background: var(--gold);
@@ -234,8 +273,21 @@ ul, ol { list-style: none; }
   display: block;
   height: 100%;
   width: 0%;
-  background: var(--gold);
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
 }
+.loader__pct {
+  display: block;
+  margin-top: 0.9rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.45);
+  font-variant-numeric: tabular-nums;
+}
+/* Sans JS : le loader ne doit jamais masquer le contenu */
+.no-js .loader { display: none; }
 
 /* ── 6. Curseur personnalisé ─────────────────────────────────── */
 .cursor, .cursor-dot { display: none; }
@@ -281,8 +333,11 @@ ul, ol { list-style: none; }
 .scroll-progress span {
   display: block;
   height: 100%;
-  width: 0%;
+  width: 100%;
   background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
 }
 
 /* ── 8. Navbar verre ─────────────────────────────────────────── */
@@ -295,9 +350,13 @@ ul, ol { list-style: none; }
   -webkit-backdrop-filter: blur(18px) saturate(140%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transform: translateY(-100%);
-  transition: background 0.4s;
+  transition: background 0.4s, box-shadow 0.4s;
 }
-.nav.is-scrolled { background: rgba(13, 29, 56, 0.85); }
+.nav.is-scrolled {
+  background: rgba(13, 29, 56, 0.88);
+  box-shadow: 0 14px 40px rgba(13, 29, 56, 0.28);
+}
+.no-js .nav { transform: none; }
 
 .nav__inner {
   max-width: var(--container);
@@ -446,6 +505,25 @@ ul, ol { list-style: none; }
   background:
     linear-gradient(100deg, rgba(13, 29, 56, 0.92) 0%, rgba(20, 42, 78, 0.72) 48%, rgba(13, 29, 56, 0.45) 100%);
 }
+/* Halo doré d'ambiance + vignettage bas pour asseoir la composition */
+.hero__overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 42% 55% at 80% 28%, rgba(200, 146, 26, 0.16), transparent 70%),
+    linear-gradient(180deg, transparent 72%, rgba(13, 29, 56, 0.55) 100%);
+}
+/* Grain cinéma très léger */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
 /* Grille blueprint subtile */
 .hero__blueprint {
   position: absolute;
@@ -501,7 +579,20 @@ ul, ol { list-style: none; }
   display: block;
   transform: translateY(110%);
 }
-.hero__line--gold > span { color: var(--gold); }
+.hero__line--gold > span {
+  color: var(--gold);
+  background: linear-gradient(100deg, var(--gold) 30%, #f2d488 50%, var(--gold) 70%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 6s ease-in-out 2s infinite;
+}
+@keyframes goldShimmer {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: 0% 0; }
+}
 
 .hero__sub {
   font-size: var(--text-lead);
@@ -581,6 +672,8 @@ ul, ol { list-style: none; }
   gap: clamp(2.5rem, 6vw, 5.5rem);
   align-items: center;
 }
+/* Empêche le contenu min-content de faire déborder les colonnes */
+.grid-2 > *, .partners__inner > * { min-width: 0; }
 .grid-2--reverse { grid-template-columns: 0.95fr 1.05fr; }
 
 .section-head {
@@ -674,6 +767,7 @@ ul, ol { list-style: none; }
 
 /* ── 12. Produits ────────────────────────────────────────────── */
 .card {
+  position: relative;
   background: var(--white);
   border: 1px solid rgba(95, 106, 117, 0.12);
   border-radius: var(--radius);
@@ -685,6 +779,20 @@ ul, ol { list-style: none; }
   box-shadow: var(--shadow-lift), 0 0 0 1px rgba(200, 146, 26, 0.22),
               0 0 44px rgba(200, 146, 26, 0.1);
 }
+/* Filet doré révélé en tête de carte */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 2;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  border-radius: 2px 2px 0 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-out);
+}
+.card:hover::before { transform: scaleX(1); }
 
 .products { background: var(--surface); }
 
@@ -758,6 +866,16 @@ ul, ol { list-style: none; }
   background-size: 84px 84px;
   mask-image: radial-gradient(ellipse at 70% 20%, black 20%, transparent 70%);
 }
+.why::after,
+.cta-final::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
 
 .why__grid {
   display: grid;
@@ -772,6 +890,7 @@ ul, ol { list-style: none; }
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
   transition: transform 0.55s var(--ease-out), background 0.4s, border-color 0.4s;
 }
 .glass-card:hover {
@@ -915,6 +1034,9 @@ ul, ol { list-style: none; }
   gap: 2rem;
   text-align: center;
 }
+@media (min-width: 1081px) {
+  .stats__grid .stat + .stat { border-left: 1px solid rgba(255, 255, 255, 0.12); }
+}
 .stat__value {
   font-family: var(--font-display);
   font-weight: 700;
@@ -978,7 +1100,7 @@ ul, ol { list-style: none; }
 }
 .partners__logos {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 .partner-mark {
@@ -1113,7 +1235,17 @@ ul, ol { list-style: none; }
   place-items: center;
   color: var(--white);
   box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
-  transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+  opacity: 0;
+  transform: translateY(16px) scale(0.85);
+  pointer-events: none;
+  transition: transform 0.5s var(--ease-out), box-shadow 0.4s, opacity 0.4s;
+}
+/* Apparaît une fois le héro dépassé (JS) — toujours visible sans JS */
+.whatsapp-fab.is-visible,
+.no-js .whatsapp-fab {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
 }
 .whatsapp-fab:hover {
   transform: translateY(-4px) scale(1.05);
@@ -1138,7 +1270,13 @@ ul, ol { list-style: none; }
   transform: translateY(36px);
   will-change: transform, opacity;
 }
-.no-js [data-reveal] { opacity: 1; transform: none; }
+/* Après révélation : on rend la main au CSS (hover, etc.) */
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+.no-js [data-reveal] { opacity: 1; transform: none; will-change: auto; }
 
 /* ── 24. Responsive ──────────────────────────────────────────── */
 @media (max-width: 1080px) {
@@ -1172,6 +1310,8 @@ ul, ol { list-style: none; }
   .hero__meta { gap: 1.2rem; flex-direction: column; align-items: flex-start; }
 
   .footer__top { grid-template-columns: 1fr; gap: 2.2rem; }
+
+  .partner-mark { font-size: 0.95rem; letter-spacing: 0.1em; }
 }
 
 /* ── 25. Accessibilité : mouvement réduit ────────────────────── */
@@ -1183,10 +1323,11 @@ ul, ol { list-style: none; }
     transition-duration: 0.01ms !important;
   }
   [data-reveal], .hero__line > span, .hero__eyebrow,
-  .hero__sub, .hero__actions, .hero__meta {
+  .hero__sub, .hero__actions, .hero__meta, .whatsapp-fab {
     opacity: 1 !important;
     transform: none !important;
   }
+  .whatsapp-fab { pointer-events: auto; }
 }
 
 :focus-visible {
