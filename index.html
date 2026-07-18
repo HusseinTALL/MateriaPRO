@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MatériaPro — Agence Commerciale · Matériaux de Construction · Ouagadougou</title>
+  <meta name="description" content="MatériaPro, votre agence commerciale à Ouagadougou : tôles, tubes, PVC, briques et quincaillerie lourde — approvisionnement multi-usines, contrôle qualité et livraison sur chantier." />
+
+  <!-- Google Fonts : Barlow Condensed (titres) + Archivo (corps) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════ LOADER ══════════════ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__mark">
+      <span class="loader__word">Matéria<em>Pro</em></span>
+      <div class="loader__bar"><span class="loader__bar-fill" id="loaderBar"></span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ CURSEUR PERSONNALISÉ (desktop) ══════════════ -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- ══════════════ BARRE DE PROGRESSION SCROLL ══════════════ -->
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+
+  <!-- ══════════════ NAVBAR VERRE ══════════════ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo" data-magnetic>
+        Matéria<em>Pro</em>
+        <span class="nav__logo-tag">Agence Commerciale</span>
+      </a>
+
+      <nav class="nav__links" id="navLinks" aria-label="Navigation principale">
+        <a href="#apropos" class="nav__link">À propos</a>
+        <a href="#produits" class="nav__link">Produits</a>
+        <a href="#services" class="nav__link">Services</a>
+        <a href="#processus" class="nav__link">Comment ça marche</a>
+        <a href="#zones" class="nav__link">Livraison</a>
+        <a href="#contact" class="nav__link">Contact</a>
+        <span class="nav__indicator" id="navIndicator" aria-hidden="true"></span>
+      </nav>
+
+      <a href="#contact" class="btn btn--gold nav__cta" data-magnetic>
+        Demander un devis
+        <i data-lucide="arrow-up-right"></i>
+      </a>
+
+      <button class="nav__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Bandeau coloris tôles — signature de marque -->
+    <div class="steel-strip" aria-hidden="true">
+      <span class="steel-strip__c steel-strip__c--red"></span>
+      <span class="steel-strip__c steel-strip__c--green"></span>
+      <span class="steel-strip__c steel-strip__c--blue"></span>
+      <span class="steel-strip__c steel-strip__c--brown"></span>
+      <span class="steel-strip__c steel-strip__c--galva"></span>
+    </div>
+  </header>
+
+  <!-- Menu mobile -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav aria-label="Navigation mobile">
+      <a href="#apropos">À propos</a>
+      <a href="#produits">Produits</a>
+      <a href="#services">Services</a>
+      <a href="#processus">Comment ça marche</a>
+      <a href="#zones">Livraison</a>
+      <a href="#contact" class="mobile-menu__cta">Demander un devis</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <!-- ══════════════ 1 · HERO ══════════════ -->
+    <section class="hero" id="hero">
+      <div class="hero__bg" id="heroBg">
+        <img
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2400&auto=format&fit=crop"
+          alt="Chantier de construction — charpente métallique au coucher du soleil"
+          loading="eager" />
+        <div class="hero__overlay"></div>
+        <div class="hero__blueprint" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero__content container">
+        <p class="hero__eyebrow reveal-line">
+          <span class="hero__eyebrow-dot"></span>
+          Agence commerciale · Matériaux de construction · Ouagadougou
+        </p>
+
+        <h1 class="hero__title" aria-label="Vos matériaux. Contrôlés. Livrés.">
+          <span class="hero__line"><span>Vos matériaux.</span></span>
+          <span class="hero__line"><span>Contrôlés.</span></span>
+          <span class="hero__line hero__line--gold"><span>Livrés.</span></span>
+        </h1>
+
+        <p class="hero__sub">
+          Tôles, tubes, PVC, briques et quincaillerie lourde — approvisionnement
+          multi&#8209;usines, contrôle qualité rigoureux et livraison organisée
+          sur chantier, avec un seul interlocuteur.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#contact" class="btn btn--gold btn--lg" data-magnetic>
+            Demander un devis gratuit
+            <i data-lucide="arrow-right"></i>
+          </a>
+          <a href="#processus" class="btn btn--ghost btn--lg" data-magnetic>
+            Comment ça marche
+          </a>
+        </div>
+
+        <div class="hero__meta">
+          <div class="hero__meta-item">
+            <i data-lucide="shield-check"></i>
+            <span>Qualité contrôlée à la source</span>
+          </div>
+          <div class="hero__meta-item">
+            <i data-lucide="truck"></i>
+            <span>Livraison Ouagadougou &amp; régions</span>
+          </div>
+          <div class="hero__meta-item">
+            <i data-lucide="factory"></i>
+            <span>Réseau multi-usines partenaires</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#apropos" class="hero__scroll" aria-label="Faire défiler vers le bas">
+        <span class="hero__scroll-line"></span>
+        Défiler
+      </a>
+    </section>
+
+    <!-- ══════════════ 2 · À PROPOS ══════════════ -->
+    <section class="section about" id="apropos">
+      <div class="container grid-2">
+        <div class="about__text">
+          <p class="eyebrow" data-reveal>L'agence</p>
+          <h2 class="h2" data-reveal>
+            Un intermédiaire de confiance entre les usines et vos chantiers.
+          </h2>
+          <p class="lead" data-reveal>
+            MatériaPro est une agence commerciale indépendante basée à
+            Ouagadougou. Nous ne fabriquons pas : nous sélectionnons,
+            contrôlons, commercialisons et organisons la livraison de vos
+            matériaux — de la commande usine jusqu'à la réception sur chantier.
+          </p>
+          <ul class="about__points" data-reveal>
+            <li>
+              <i data-lucide="badge-check"></i>
+              <div>
+                <strong>Indépendance</strong>
+                <p>Nous représentons vos intérêts, pas ceux d'une seule usine.</p>
+              </div>
+            </li>
+            <li>
+              <i data-lucide="handshake"></i>
+              <div>
+                <strong>Suivi humain</strong>
+                <p>Un interlocuteur dédié, de la demande de devis à la facturation.</p>
+              </div>
+            </li>
+            <li>
+              <i data-lucide="map-pin"></i>
+              <div>
+                <strong>Ancrage local</strong>
+                <p>Une équipe burkinabè qui connaît le terrain et vos contraintes chantier.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <figure class="about__media" data-reveal>
+          <div class="media-frame">
+            <img
+              src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop"
+              alt="Contrôle qualité en environnement industriel"
+              loading="lazy" />
+          </div>
+          <figcaption class="media-caption">
+            <span class="media-caption__num">FCQ</span>
+            Chaque lot inspecté selon une fiche de contrôle qualité par catégorie.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="divider container" data-reveal aria-hidden="true"><span></span></div>
+
+    <!-- ══════════════ 3 · PRODUITS ══════════════ -->
+    <section class="section products" id="produits">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" data-reveal>Catalogue</p>
+            <h2 class="h2" data-reveal>Cinq familles de produits,<br />un seul interlocuteur.</h2>
+          </div>
+          <p class="section-head__note" data-reveal>
+            Coloris et références variés · longueurs standards ou sur mesure ·
+            devis personnalisé sous 24–48&nbsp;h.
+          </p>
+        </div>
+
+        <div class="products__grid">
+          <article class="card product-card product-card--wide" data-reveal>
+            <div class="product-card__img">
+              <img src="https://images.unsplash.com/photo-1535732820275-9ffd998cac22?q=80&w=1600&auto=format&fit=crop" alt="Tôles et bardage métallique" loading="lazy" />
+            </div>
+            <div class="product-card__body">
+              <i data-lucide="layers"></i>
+              <h3>Tôles</h3>
+              <p>Tôles bac 4 et 5 ondulations, prélaquées et galvanisées, bardage. Rouge, vert, bleu, marron, gris galva.</p>
+              <span class="product-card__link">Demander un devis <i data-lucide="arrow-up-right"></i></span>
+            </div>
+          </article>
+
+          <article class="card product-card" data-reveal>
+            <div class="product-card__body">
+              <i data-lucide="git-commit-vertical"></i>
+              <h3>Tubes &amp; profilés</h3>
+              <p>Tubes carrés, rectangulaires, ronds et fer à béton pour vos structures.</p>
+              <span class="product-card__link">Demander un devis <i data-lucide="arrow-up-right"></i></span>
+            </div>
+          </article>
+
+          <article class="card product-card" data-reveal>
+            <div class="product-card__body">
+              <i data-lucide="pipette"></i>
+              <h3>PVC</h3>
+              <p>Tuyaux, gouttières, raccords et équipements de plomberie et d'assainissement.</p>
+              <span class="product-card__link">Demander un devis <i data-lucide="arrow-up-right"></i></span>
+            </div>
+          </article>
+
+          <article class="card product-card" data-reveal>
+            <div class="product-card__body">
+              <i data-lucide="brick-wall"></i>
+              <h3>Briques &amp; parpaings</h3>
+              <p>Briques et parpaings selon disponibilité des usines partenaires.</p>
+              <span class="product-card__link">Demander un devis <i data-lucide="arrow-up-right"></i></span>
+            </div>
+          </article>
+
+          <article class="card product-card" data-reveal>
+            <div class="product-card__body">
+              <i data-lucide="wrench"></i>
+              <h3>Quincaillerie lourde</h3>
+              <p>Articles complémentaires pour équiper vos chantiers de bout en bout.</p>
+              <span class="product-card__link">Demander un devis <i data-lucide="arrow-up-right"></i></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ 4 · POURQUOI NOUS ══════════════ -->
+    <section class="section why" id="pourquoi">
+      <div class="why__bg" aria-hidden="true"></div>
+      <div class="container">
+        <p class="eyebrow eyebrow--light" data-reveal>Pourquoi MatériaPro</p>
+        <h2 class="h2 h2--light" data-reveal>
+          Trois piliers, une promesse&nbsp;:<br />
+          moins de litiges, plus de chantiers livrés à l'heure.
+        </h2>
+
+        <div class="why__grid">
+          <article class="glass-card" data-reveal>
+            <span class="glass-card__index">Multi-usines</span>
+            <i data-lucide="factory"></i>
+            <h3>Sourcing multi-usines</h3>
+            <p>Accédez à plusieurs gammes et producteurs — CMP et autres fabricants locaux — via un seul interlocuteur commercial.</p>
+          </article>
+          <article class="glass-card" data-reveal>
+            <span class="glass-card__index">Qualité</span>
+            <i data-lucide="scan-search"></i>
+            <h3>Qualité contrôlée</h3>
+            <p>Chaque lot est inspecté à l'enlèvement ou à réception : checklist par catégorie, photos, verdict conforme ou réserves.</p>
+          </article>
+          <article class="glass-card" data-reveal>
+            <span class="glass-card__index">Logistique</span>
+            <i data-lucide="truck"></i>
+            <h3>Livraison organisée</h3>
+            <p>Transport planifié par zone, tournées groupées, bon de livraison signé à la réception sur chantier.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ 5 · COMMENT ÇA MARCHE ══════════════ -->
+    <section class="section process" id="processus">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" data-reveal>Le parcours</p>
+            <h2 class="h2" data-reveal>De votre demande<br />à la réception sur chantier.</h2>
+          </div>
+          <p class="section-head__note" data-reveal>
+            Sept étapes maîtrisées. Les délais sont précisés au cas par cas
+            dans chaque devis, selon le produit et la disponibilité usine.
+          </p>
+        </div>
+
+        <ol class="process__list">
+          <li class="process__step" data-reveal>
+            <span class="process__num">1</span>
+            <div><h3>Contact &amp; demande de devis</h3><p>Par téléphone, WhatsApp ou formulaire — décrivez vos besoins.</p></div>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">2</span>
+            <div><h3>Devis détaillé</h3><p>Produits, transport et délais — tout compris pour Ouagadougou.</p></div>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">3</span>
+            <div><h3>Validation &amp; paiement</h3><p>Comptant ou acompte selon votre profil client.</p></div>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">4</span>
+            <div><h3>Commande usine &amp; contrôle qualité</h3><p>Inspection du lot selon la fiche de contrôle qualité (FCQ).</p></div>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">5</span>
+            <div><h3>Organisation de la livraison</h3><p>Tournée planifiée, transporteur confirmé, créneau communiqué.</p></div>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">6</span>
+            <div><h3>Réception sur chantier</h3><p>Bon de livraison, vérification et signature à la réception.</p></div>
+          </li>
+          <li class="process__step" data-reveal>
+            <span class="process__num">7</span>
+            <div><h3>Facturation &amp; suivi</h3><p>Facture claire et suivi de la relation commerciale dans la durée.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="divider container" data-reveal aria-hidden="true"><span></span></div>
+
+    <!-- ══════════════ 6 · SERVICES ══════════════ -->
+    <section class="section services" id="services">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Nos services</p>
+        <h2 class="h2" data-reveal>Une offre intégrée,<br />au-delà de la vente de produits.</h2>
+
+        <div class="services__grid">
+          <article class="card service-card" data-reveal>
+            <i data-lucide="file-text"></i>
+            <h3>Devis rapide</h3>
+            <p>Réponse structurée sous 24–48&nbsp;h, prix transport inclus pour Ouagadougou.</p>
+          </article>
+          <article class="card service-card" data-reveal>
+            <i data-lucide="clipboard-check"></i>
+            <h3>Contrôle qualité</h3>
+            <p>Checklist par catégorie, photos, verdict conforme, réserves ou non conforme.</p>
+          </article>
+          <article class="card service-card" data-reveal>
+            <i data-lucide="route"></i>
+            <h3>Livraison organisée</h3>
+            <p>Sur chantier, par zone, avec bon de livraison signé à la réception.</p>
+          </article>
+          <article class="card service-card" data-reveal>
+            <i data-lucide="radar"></i>
+            <h3>Suivi de commande</h3>
+            <p>Des statuts clairs, de la validation du devis jusqu'à la livraison.</p>
+          </article>
+          <article class="card service-card" data-reveal>
+            <i data-lucide="messages-square"></i>
+            <h3>Conseil commercial</h3>
+            <p>Aide au choix des produits, des volumes et du planning chantier.</p>
+          </article>
+          <article class="card service-card" data-reveal>
+            <i data-lucide="package-open"></i>
+            <h3>Échantillons</h3>
+            <p>Sur demande pour les produits sensibles : tôles, profilés, PVC.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ 7 · ZONES DE LIVRAISON ══════════════ -->
+    <section class="section zones" id="zones">
+      <div class="container grid-2 grid-2--reverse">
+        <figure class="zones__media" data-reveal>
+          <div class="media-frame">
+            <img
+              src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1600&auto=format&fit=crop"
+              alt="Camion de livraison logistique industrielle"
+              loading="lazy" />
+          </div>
+          <figcaption class="media-caption">
+            <span class="media-caption__num">14</span>
+            zones couvertes à Ouagadougou — régions sur devis.
+          </figcaption>
+        </figure>
+
+        <div>
+          <p class="eyebrow" data-reveal>Zone d'intervention</p>
+          <h2 class="h2" data-reveal>Ouagadougou en tournées planifiées, les régions sur devis.</h2>
+          <p class="lead" data-reveal>
+            Notre hub principal est à Ouagadougou. Les livraisons y sont
+            organisées par zone en tournées groupées ; l'enlèvement direct est
+            possible sur accord du fournisseur.
+          </p>
+          <div class="zones__tags" data-reveal>
+            <span>Ouaga 2000</span><span>Zone industrielle</span><span>Tampouy</span>
+            <span>Dassasgho</span><span>Bissighin</span><span>Pissy</span>
+            <span>+ 8 autres zones</span>
+          </div>
+          <a href="#contact" class="btn btn--navy" data-magnetic data-reveal>
+            Vérifier ma zone
+            <i data-lucide="map-pin"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ 8 · STATISTIQUES ══════════════ -->
+    <section class="section stats" id="stats">
+      <div class="stats__bg" aria-hidden="true"></div>
+      <div class="container">
+        <div class="stats__grid">
+          <div class="stat" data-reveal>
+            <span class="stat__value"><span class="counter" data-target="5">0</span></span>
+            <span class="stat__label">Familles de produits</span>
+          </div>
+          <div class="stat" data-reveal>
+            <span class="stat__value"><span class="counter" data-target="14">0</span></span>
+            <span class="stat__label">Zones livrées à Ouagadougou</span>
+          </div>
+          <div class="stat" data-reveal>
+            <span class="stat__value"><span class="counter" data-target="48">0</span><em>h</em></span>
+            <span class="stat__label">Délai maximum de devis</span>
+          </div>
+          <div class="stat" data-reveal>
+            <span class="stat__value"><span class="counter" data-target="100">0</span><em>%</em></span>
+            <span class="stat__label">Lots inspectés avant livraison</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ 9 · TÉMOIGNAGES ══════════════ -->
+    <section class="section testimonials" id="temoignages">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Ils nous font confiance</p>
+        <h2 class="h2" data-reveal>Pensé pour les professionnels<br />du chantier et du négoce.</h2>
+
+        <div class="testimonials__grid">
+          <figure class="card quote-card" data-reveal>
+            <i data-lucide="quote"></i>
+            <blockquote>
+              «&nbsp;Livré à l'heure, sans mauvaise surprise sur la qualité.
+              Le contrôle avant livraison change tout sur nos chantiers.&nbsp;»
+            </blockquote>
+            <figcaption>
+              <strong>Chef de chantier</strong>
+              <span>Entreprise BTP · Ouagadougou</span>
+            </figcaption>
+          </figure>
+          <figure class="card quote-card" data-reveal>
+            <i data-lucide="quote"></i>
+            <blockquote>
+              «&nbsp;Un grossiste réactif avec plusieurs gammes au même endroit.
+              Les tournées groupées simplifient notre réassort.&nbsp;»
+            </blockquote>
+            <figcaption>
+              <strong>Gérant de quincaillerie</strong>
+              <span>Revendeur · Zone industrielle</span>
+            </figcaption>
+          </figure>
+          <figure class="card quote-card" data-reveal>
+            <i data-lucide="quote"></i>
+            <blockquote>
+              «&nbsp;J'ai été guidé du devis à la livraison à domicile.
+              Un seul contact, des prix clairs, transport inclus.&nbsp;»
+            </blockquote>
+            <figcaption>
+              <strong>Particulier en construction</strong>
+              <span>Maître d'ouvrage · Ouaga 2000</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ 10 · PARTENAIRES ══════════════ -->
+    <section class="section partners" id="partenaires">
+      <div class="container">
+        <div class="partners__inner" data-reveal>
+          <div>
+            <p class="eyebrow" data-reveal>Partenaires industriels</p>
+            <h2 class="h3-title">Le bras commercial des usines locales, sans charge fixe.</h2>
+            <p class="lead">
+              MatériaPro travaille avec CMP et d'autres producteurs partenaires :
+              clientèle BTP qualifiée, encadrement commercial structuré,
+              traçabilité qualité et retours terrain.
+            </p>
+          </div>
+          <div class="partners__logos" aria-label="Usines partenaires">
+            <span class="partner-mark">CMP</span>
+            <span class="partner-mark">Usine partenaire</span>
+            <span class="partner-mark">Usine partenaire</span>
+            <span class="partner-mark partner-mark--gold">Votre usine ici</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ 11 · CTA FINAL ══════════════ -->
+    <section class="section cta-final" id="contact">
+      <div class="cta-final__bg" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2400&auto=format&fit=crop"
+          alt="" loading="lazy" />
+        <div class="cta-final__overlay"></div>
+      </div>
+      <div class="container cta-final__content">
+        <h2 class="cta-final__title" data-reveal>
+          Parlons de votre<br /><span>prochain chantier.</span>
+        </h2>
+        <p class="lead lead--light" data-reveal>
+          Devis gratuit sous 24–48&nbsp;h, transport inclus pour Ouagadougou.
+          Un interlocuteur unique, du premier appel à la livraison.
+        </p>
+        <div class="cta-final__actions" data-reveal>
+          <a href="tel:+226XXXXXXXX" class="btn btn--gold btn--lg" data-magnetic id="ctaPulse">
+            <i data-lucide="phone"></i>
+            +226 XX XX XX XX
+          </a>
+          <a href="https://wa.me/226XXXXXXXX" class="btn btn--ghost btn--lg" data-magnetic>
+            <i data-lucide="message-circle"></i>
+            Écrire sur WhatsApp
+          </a>
+        </div>
+        <p class="cta-final__hours" data-reveal>
+          Lun–Ven 8h–18h · Sam 8h–13h · contact@materiapro.bf
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════ 12 · FOOTER ══════════════ -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <span class="footer__logo">Matéria<em>Pro</em></span>
+            <p>
+              Agence commerciale indépendante · Matériaux de construction<br />
+              Ouagadougou — Burkina Faso
+            </p>
+            <div class="steel-strip steel-strip--footer" aria-hidden="true">
+              <span class="steel-strip__c steel-strip__c--red"></span>
+              <span class="steel-strip__c steel-strip__c--green"></span>
+              <span class="steel-strip__c steel-strip__c--blue"></span>
+              <span class="steel-strip__c steel-strip__c--brown"></span>
+              <span class="steel-strip__c steel-strip__c--galva"></span>
+            </div>
+          </div>
+
+          <nav class="footer__col" aria-label="Produits">
+            <h3>Produits</h3>
+            <a href="#produits">Tôles</a>
+            <a href="#produits">Tubes &amp; profilés</a>
+            <a href="#produits">PVC</a>
+            <a href="#produits">Briques &amp; parpaings</a>
+            <a href="#produits">Quincaillerie lourde</a>
+          </nav>
+
+          <nav class="footer__col" aria-label="Entreprise">
+            <h3>Entreprise</h3>
+            <a href="#apropos">À propos</a>
+            <a href="#services">Services</a>
+            <a href="#processus">Comment ça marche</a>
+            <a href="#partenaires">Partenaires usines</a>
+          </nav>
+
+          <div class="footer__col">
+            <h3>Contact</h3>
+            <a href="tel:+226XXXXXXXX">+226 XX XX XX XX</a>
+            <a href="mailto:contact@materiapro.bf">contact@materiapro.bf</a>
+            <span>Lun–Ven 8h–18h · Sam 8h–13h</span>
+            <span>Ouagadougou, Burkina Faso</span>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span>© 2026 MatériaPro — Agence Commerciale. Tous droits réservés.</span>
+          <span>RCCM / IFU : à compléter</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ══════════════ BOUTON WHATSAPP FLOTTANT ══════════════ -->
+  <a href="https://wa.me/226XXXXXXXX" class="whatsapp-fab" id="whatsappFab" aria-label="Nous écrire sur WhatsApp">
+    <i data-lucide="message-circle"></i>
+    <span class="whatsapp-fab__ring" aria-hidden="true"></span>
+  </a>
+
+  <!-- Anime.js + Lucide via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
