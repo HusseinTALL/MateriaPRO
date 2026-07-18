@@ -14,6 +14,11 @@
     "(hover: hover) and (pointer: fine)"
   ).matches;
 
+  // Si le CDN d'Anime.js est indisponible (connexion lente ou coupée),
+  // le site doit rester pleinement lisible : on désactive les animations.
+  const hasAnime = typeof window.anime === "function";
+  const noMotion = prefersReducedMotion || !hasAnime;
+
   /* ── Icônes Lucide ─────────────────────────────────────────── */
   if (window.lucide) lucide.createIcons();
 
@@ -22,12 +27,25 @@
      ══════════════════════════════════════════════════════════ */
   const loader = document.getElementById("loader");
   const loaderBar = document.getElementById("loaderBar");
+  const loaderPct = document.getElementById("loaderPct");
   const nav = document.getElementById("nav");
+  let introPlayed = false;
 
   function playIntro() {
-    if (prefersReducedMotion) {
+    if (introPlayed) return;
+    introPlayed = true;
+
+    if (noMotion) {
       loader.classList.add("is-done");
       nav.style.transform = "translateY(0)";
+      document
+        .querySelectorAll(
+          ".hero__eyebrow, .hero__sub, .hero__actions, .hero__meta"
+        )
+        .forEach((el) => (el.style.opacity = "1"));
+      document
+        .querySelectorAll(".hero__line > span")
+        .forEach((el) => (el.style.transform = "none"));
       return;
     }
 
@@ -38,6 +56,9 @@
       width: "100%",
       duration: 900,
       easing: "easeInOutQuart",
+      update: (anim) => {
+        if (loaderPct) loaderPct.innerHTML = `${Math.round(anim.progress)}&nbsp;%`;
+      },
     })
       .add({
         targets: loader,
@@ -89,9 +110,7 @@
 
   window.addEventListener("load", playIntro);
   // Sécurité : si "load" tarde (images lentes), on lance quand même
-  setTimeout(() => {
-    if (!loader.classList.contains("is-done")) playIntro();
-  }, 3500);
+  setTimeout(playIntro, 3500);
 
   /* ══════════════════════════════════════════════════════════
      2. CURSEUR PERSONNALISÉ (desktop uniquement)
@@ -132,7 +151,7 @@
   /* ══════════════════════════════════════════════════════════
      3. EFFET MAGNÉTIQUE SUR LES BOUTONS
      ══════════════════════════════════════════════════════════ */
-  if (isDesktopPointer && !prefersReducedMotion) {
+  if (isDesktopPointer && !noMotion) {
     document.querySelectorAll("[data-magnetic]").forEach((el) => {
       const strength = 22;
 
@@ -166,6 +185,8 @@
      ══════════════════════════════════════════════════════════ */
   const progressBar = document.getElementById("scrollProgress");
   const heroBg = document.getElementById("heroBg");
+  const whatsappFab = document.getElementById("whatsappFab");
+  const mediaFrames = document.querySelectorAll(".media-frame");
   let ticking = false;
 
   function onScroll() {
@@ -173,27 +194,50 @@
     const docHeight =
       document.documentElement.scrollHeight - window.innerHeight;
 
-    // Barre de progression
-    progressBar.style.width = `${(scrollTop / docHeight) * 100}%`;
+    // Barre de progression (transform : pas de reflow)
+    progressBar.style.transform = `scaleX(${
+      docHeight > 0 ? scrollTop / docHeight : 0
+    })`;
 
     // Navbar opaque après le héro
     nav.classList.toggle("is-scrolled", scrollTop > 80);
 
-    // Parallax subtil du fond héro
-    if (!prefersReducedMotion && scrollTop < window.innerHeight) {
-      heroBg.style.transform = `translateY(${scrollTop * 0.25}px)`;
+    // Bouton WhatsApp : apparaît une fois le héro entamé
+    whatsappFab.classList.toggle(
+      "is-visible",
+      scrollTop > window.innerHeight * 0.5
+    );
+
+    if (!prefersReducedMotion) {
+      // Parallax subtil du fond héro
+      if (scrollTop < window.innerHeight) {
+        heroBg.style.transform = `translateY(${scrollTop * 0.25}px)`;
+      }
+
+      // Parallax doux des visuels éditoriaux
+      mediaFrames.forEach((frame) => {
+        const rect = frame.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const offset =
+          (rect.top + rect.height / 2 - window.innerHeight / 2) /
+          window.innerHeight;
+        frame.style.transform = `translateY(${(offset * -16).toFixed(1)}px)`;
+      });
     }
 
     updateActiveLink();
     ticking = false;
   }
 
-  window.addEventListener("scroll", () => {
+  function requestScrollFrame() {
     if (!ticking) {
       requestAnimationFrame(onScroll);
       ticking = true;
     }
-  });
+  }
+
+  window.addEventListener("scroll", requestScrollFrame);
+  window.addEventListener("resize", requestScrollFrame);
 
   /* ══════════════════════════════════════════════════════════
      5. INDICATEUR DE NAVIGATION ACTIF
@@ -233,11 +277,8 @@
      ══════════════════════════════════════════════════════════ */
   const revealEls = document.querySelectorAll("[data-reveal]");
 
-  if (prefersReducedMotion) {
-    revealEls.forEach((el) => {
-      el.style.opacity = "1";
-      el.style.transform = "none";
-    });
+  if (noMotion) {
+    revealEls.forEach((el) => el.classList.add("is-revealed"));
   } else {
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -252,6 +293,13 @@
             easing: "easeOutExpo",
             // Léger décalage naturel entre éléments voisins
             delay: (entry.target.dataset.delay || 0) * 1,
+            // On efface les styles inline pour rendre la main au CSS
+            // (sinon le transform résiduel neutralise les effets :hover)
+            complete: () => {
+              entry.target.classList.add("is-revealed");
+              entry.target.style.opacity = "";
+              entry.target.style.transform = "";
+            },
           });
 
           revealObserver.unobserve(entry.target);
@@ -286,7 +334,7 @@
         const el = entry.target;
         const target = parseInt(el.dataset.target, 10);
 
-        if (prefersReducedMotion) {
+        if (noMotion) {
           el.textContent = target;
         } else {
           const obj = { value: 0 };
@@ -311,7 +359,7 @@
      8. PULSATION DU CTA PRINCIPAL
      ══════════════════════════════════════════════════════════ */
   const ctaPulse = document.getElementById("ctaPulse");
-  if (ctaPulse && !prefersReducedMotion) {
+  if (ctaPulse && !noMotion) {
     anime({
       targets: ctaPulse,
       boxShadow: [
@@ -337,6 +385,18 @@
     burger.setAttribute("aria-expanded", String(open));
     mobileMenu.setAttribute("aria-hidden", String(!open));
     document.body.style.overflow = open ? "hidden" : "";
+
+    // Entrée en cascade des liens
+    if (open && !noMotion) {
+      anime({
+        targets: mobileMenu.querySelectorAll("a"),
+        opacity: [0, 1],
+        translateY: [26, 0],
+        duration: 650,
+        easing: "easeOutExpo",
+        delay: anime.stagger(65, { start: 120 }),
+      });
+    }
   }
 
   burger.addEventListener("click", () =>
@@ -347,7 +407,36 @@
   );
 
   /* ══════════════════════════════════════════════════════════
-     10. ÉTAT INITIAL
+     10. INCLINAISON 3D SUBTILE DES CARTES (desktop)
+     ══════════════════════════════════════════════════════════ */
+  if (isDesktopPointer && !prefersReducedMotion) {
+    const MAX_TILT = 3; // degrés — perceptible sans être gadget
+
+    document
+      .querySelectorAll(".product-card, .service-card, .quote-card, .glass-card")
+      .forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width - 0.5;
+          const py = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transition =
+            "transform 0.15s ease-out, box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
+          card.style.transform =
+            `perspective(900px) translateY(-8px) ` +
+            `rotateX(${(-py * MAX_TILT).toFixed(2)}deg) ` +
+            `rotateY(${(px * MAX_TILT).toFixed(2)}deg)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transition = "";
+          card.style.transform = "";
+        });
+      });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     11. ÉTAT INITIAL
      ══════════════════════════════════════════════════════════ */
   updateActiveLink();
+  onScroll();
 })();

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MatériaPro — Agence Commerciale · Matériaux de Construction · Ouagadougou</title>
   <meta name="description" content="MatériaPro, votre agence commerciale à Ouagadougou : tôles, tubes, PVC, briques et quincaillerie lourde — approvisionnement multi-usines, contrôle qualité et livraison sur chantier." />
+  <meta name="theme-color" content="#0d1d38" />
+
+  <script>document.documentElement.classList.remove("no-js");</script>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2400&auto=format&fit=crop" />
 
   <!-- Google Fonts : Barlow Condensed (titres) + Archivo (corps) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,6 +24,7 @@
     <div class="loader__mark">
       <span class="loader__word">Matéria<em>Pro</em></span>
       <div class="loader__bar"><span class="loader__bar-fill" id="loaderBar"></span></div>
+      <span class="loader__pct" id="loaderPct" aria-hidden="true">0&nbsp;%</span>
     </div>
   </div>
 
@@ -87,7 +92,7 @@
         <img
           src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2400&auto=format&fit=crop"
           alt="Chantier de construction — charpente métallique au coucher du soleil"
-          loading="eager" />
+          loading="eager" fetchpriority="high" />
         <div class="hero__overlay"></div>
         <div class="hero__blueprint" aria-hidden="true"></div>
       </div>
@@ -537,7 +542,7 @@
             <i data-lucide="phone"></i>
             +226 XX XX XX XX
           </a>
-          <a href="https://wa.me/226XXXXXXXX" class="btn btn--ghost btn--lg" data-magnetic>
+          <a href="https://wa.me/226XXXXXXXX" target="_blank" rel="noopener" class="btn btn--ghost btn--lg" data-magnetic>
             <i data-lucide="message-circle"></i>
             Écrire sur WhatsApp
           </a>
@@ -602,7 +607,7 @@
   </main>
 
   <!-- ══════════════ BOUTON WHATSAPP FLOTTANT ══════════════ -->
-  <a href="https://wa.me/226XXXXXXXX" class="whatsapp-fab" id="whatsappFab" aria-label="Nous écrire sur WhatsApp">
+  <a href="https://wa.me/226XXXXXXXX" target="_blank" rel="noopener" class="whatsapp-fab" id="whatsappFab" aria-label="Nous écrire sur WhatsApp">
     <i data-lucide="message-circle"></i>
     <span class="whatsapp-fab__ring" aria-hidden="true"></span>
   </a>
