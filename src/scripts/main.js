@@ -388,7 +388,7 @@ if (noMotion) {
   // Décalage en cascade pour les cartes d'une même grille
   document
     .querySelectorAll(
-      ".products__grid, .why__grid, .services__grid, .testimonials__grid, .stats__grid, .process__list"
+      ".products__grid, .why__grid, .services__grid, .testimonials__grid, .stats__grid, .process__list, .faq__list"
     )
     .forEach((grid) => {
       [...grid.querySelectorAll("[data-reveal]")].forEach((el, i) => {

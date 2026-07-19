@@ -3,7 +3,13 @@ const products = [
   {
     icon: "layers",
     title: "Tôles",
-    text: "Tôles bac 4 et 5 ondulations, prélaquées et galvanisées, bardage. Rouge, vert, bleu, marron, gris galva.",
+    text: "Tôles bac 4 et 5 ondulations, prélaquées et galvanisées, bardage pour toitures et façades. Cinq coloris signature : rouge, vert, bleu, marron et gris galva.",
+    specs: [
+      "Bac 4 & 5 ondulations",
+      "Prélaquée · galvanisée",
+      "Longueurs standard ou sur mesure",
+      "5 coloris",
+    ],
     wide: true,
     image:
       "https://images.unsplash.com/photo-1535732820275-9ffd998cac22?q=80&w=1600&auto=format&fit=crop",
@@ -12,22 +18,26 @@ const products = [
   {
     icon: "git-commit-vertical",
     title: "Tubes & profilés",
-    text: "Tubes carrés, rectangulaires, ronds et fer à béton pour vos structures.",
+    text: "Tubes carrés, rectangulaires et ronds, cornières et fer à béton pour charpentes, menuiserie métallique et structures.",
+    specs: ["Carré · rectangulaire · rond", "Fer à béton Ø 6 à 16 mm", "Barres de 6 m"],
   },
   {
     icon: "pipette",
     title: "PVC",
-    text: "Tuyaux, gouttières, raccords et équipements de plomberie et d'assainissement.",
+    text: "Tuyaux pression et évacuation, gouttières, coudes, raccords et accessoires de plomberie et d'assainissement.",
+    specs: ["Évacuation & pression", "Ø 32 à 200 mm", "Raccords & accessoires"],
   },
   {
     icon: "brick-wall",
     title: "Briques & parpaings",
-    text: "Briques et parpaings selon disponibilité des usines partenaires.",
+    text: "Parpaings creux et pleins, briques et agglos produits par les usines partenaires, contrôlés avant enlèvement.",
+    specs: ["Parpaings 10 · 15 · 20", "Creux ou pleins", "Selon disponibilité usine"],
   },
   {
     icon: "wrench",
     title: "Quincaillerie lourde",
-    text: "Articles complémentaires pour équiper vos chantiers de bout en bout.",
+    text: "Pointes, fils d'attache, visserie, fixations et outillage : le complément indispensable pour équiper vos chantiers de bout en bout.",
+    specs: ["Pointes & fils d'attache", "Visserie & fixations", "Outillage chantier"],
   },
 ];
 ---
@@ -62,6 +72,13 @@ const products = [
               <i data-lucide={p.icon}></i>
               <h3 set:html={p.title}></h3>
               <p>{p.text}</p>
+              {p.specs && (
+                <ul class="product-card__specs">
+                  {p.specs.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ul>
+              )}
               <span class="product-card__link">
                 Demander un devis <i data-lucide="arrow-up-right"></i>
               </span>

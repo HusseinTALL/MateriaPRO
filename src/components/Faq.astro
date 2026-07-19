@@ -1,0 +1,73 @@
+---
+const faqs = [
+  {
+    q: "Quels sont les délais de livraison à Ouagadougou ?",
+    a: "Ils dépendent du produit et de la disponibilité usine : chaque devis précise un délai ferme. Les livraisons sont organisées en tournées groupées par zone, et le créneau de passage vous est confirmé à l'avance.",
+  },
+  {
+    q: "Livrez-vous en dehors de Ouagadougou ?",
+    a: "Oui, les régions sont servies sur devis : le transport est chiffré au cas par cas selon la destination et le tonnage. Notre hub logistique reste basé à Ouagadougou.",
+  },
+  {
+    q: "Comment se passe le paiement ?",
+    a: "Comptant ou acompte à la commande, selon votre profil client. Chaque commande donne lieu à une confirmation écrite et à une facture claire ; le solde est réglé selon les conditions convenues au devis.",
+  },
+  {
+    q: "Y a-t-il une quantité minimum de commande ?",
+    a: "Cela dépend du produit et de l'usine partenaire ; le seuil éventuel est indiqué dès le devis. Notre équipe vous conseille sur les volumes pour optimiser le coût de transport.",
+  },
+  {
+    q: "Que se passe-t-il si un lot est non conforme ?",
+    a: "Chaque lot est inspecté avant livraison selon une fiche de contrôle qualité (FCQ) : s'il est non conforme, il est refusé ou échangé auprès de l'usine avant expédition. À la réception, les réserves éventuelles sont notées sur le bon de livraison et traitées.",
+  },
+  {
+    q: "Puis-je obtenir des échantillons ?",
+    a: "Oui, sur demande pour les produits sensibles — tôles, tubes et profilés, PVC — afin de valider teinte, épaisseur et finition avant de commander.",
+  },
+  {
+    q: "L'enlèvement direct est-il possible ?",
+    a: "Oui, sur accord du fournisseur : nous organisons alors le rendez-vous d'enlèvement, et le contrôle qualité reste assuré avant le chargement.",
+  },
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
+---
+
+<!-- ══════════════ 10b · FAQ ══════════════ -->
+<section class="section faq" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow" data-reveal>FAQ</p>
+        <h2 class="h2" data-split>Les questions<br />que l'on nous pose.</h2>
+      </div>
+      <p class="section-head__note" data-reveal>
+        Une autre question ? Appelez-nous ou écrivez-nous sur WhatsApp —
+        réponse rapide aux heures ouvrées.
+      </p>
+    </div>
+
+    <div class="faq__list">
+      {
+        faqs.map((f) => (
+          <details class="faq__item" data-reveal>
+            <summary>
+              {f.q}
+              <span class="faq__marker" aria-hidden="true" />
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={faqJsonLd} />
+</section>

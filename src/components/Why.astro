@@ -5,18 +5,33 @@ const pillars = [
     icon: "factory",
     title: "Sourcing multi-usines",
     text: "Accédez à plusieurs gammes et producteurs — CMP et autres fabricants locaux — via un seul interlocuteur commercial.",
+    items: [
+      "Gammes comparées et négociées",
+      "Disponibilités vérifiées auprès des usines",
+      "Un seul devis, plusieurs producteurs",
+    ],
   },
   {
     index: "Qualité",
     icon: "scan-search",
     title: "Qualité contrôlée",
     text: "Chaque lot est inspecté à l'enlèvement ou à réception : checklist par catégorie, photos, verdict conforme ou réserves.",
+    items: [
+      "Checklist FCQ par catégorie de produit",
+      "Photos du lot avant expédition",
+      "Verdict : conforme, réserves ou refus",
+    ],
   },
   {
     index: "Logistique",
     icon: "truck",
     title: "Livraison organisée",
     text: "Transport planifié par zone, tournées groupées, bon de livraison signé à la réception sur chantier.",
+    items: [
+      "Tournées groupées par zone",
+      "Créneau de passage confirmé à l'avance",
+      "Bon de livraison signé à la réception",
+    ],
   },
 ];
 ---
@@ -39,6 +54,11 @@ const pillars = [
             <i data-lucide={p.icon}></i>
             <h3>{p.title}</h3>
             <p>{p.text}</p>
+            <ul class="glass-card__list">
+              {p.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
           </article>
         ))
       }

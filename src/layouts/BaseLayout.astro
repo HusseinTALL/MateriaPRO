@@ -10,6 +10,36 @@ const {
 
 const heroImage =
   "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2400&auto=format&fit=crop";
+
+// Données structurées : fiche entreprise locale (SEO)
+const businessJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "MatériaPro",
+  description:
+    "Agence commerciale indépendante de matériaux de construction à Ouagadougou : tôles, tubes et profilés, PVC, briques et quincaillerie lourde. Approvisionnement multi-usines, contrôle qualité et livraison sur chantier.",
+  email: "contact@materiapro.bf",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ouagadougou",
+    addressCountry: "BF",
+  },
+  areaServed: "Ouagadougou et régions du Burkina Faso",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "08:00",
+      closes: "13:00",
+    },
+  ],
+});
 ---
 
 <!doctype html>
@@ -21,6 +51,20 @@ const heroImage =
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0d1d38" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Partage social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MatériaPro" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={heroImage} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={heroImage} />
+
+    <script type="application/ld+json" set:html={businessJsonLd} />
 
     <script is:inline>
       document.documentElement.classList.remove("no-js");
