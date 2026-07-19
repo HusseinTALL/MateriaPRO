@@ -371,7 +371,12 @@ ul, ol { list-style: none; }
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+  transition: padding 0.45s var(--ease-out);
 }
+/* Navbar compacte une fois le héro quitté */
+.nav.is-scrolled .nav__inner { padding-block: 0.55rem; }
+.nav.is-scrolled .nav__logo { font-size: 1.35rem; }
+.nav.is-scrolled .nav__logo-tag { opacity: 0; transform: translateY(-6px); }
 
 .nav__logo {
   font-family: var(--font-display);
@@ -383,6 +388,7 @@ ul, ol { list-style: none; }
   display: flex;
   flex-direction: column;
   line-height: 1;
+  transition: font-size 0.45s var(--ease-out);
 }
 .nav__logo em { color: var(--gold); font-style: normal; display: inline; }
 .nav__logo-tag {
@@ -393,6 +399,7 @@ ul, ol { list-style: none; }
   color: rgba(255, 255, 255, 0.55);
   margin-top: 0.3rem;
   text-transform: uppercase;
+  transition: opacity 0.3s, transform 0.3s;
 }
 
 .nav__links {
@@ -1518,9 +1525,12 @@ html.lenis, html.lenis body { height: auto; }
 }
 .is-cinematic .products__progress { display: block; }
 
-/* Couches liées au scroll (scène 4) */
+/* Couches liées au scroll — desktop (.is-cinematic) et tactile (.is-cinelite) */
 /* Le tracé des séparateurs est scrubbé par GSAP, pas par la transition */
-.is-cinematic .divider span { transition: none; }
+.is-cinematic .divider span,
+.is-cinelite .divider span { transition: none; }
 /* Marge de débattement pour la parallaxe des fonds techniques */
-.is-cinematic .why__bg { inset: -14% 0; }
-.is-cinematic .stats__bg { inset: -14% 0; }
+.is-cinematic .why__bg,
+.is-cinelite .why__bg,
+.is-cinematic .stats__bg,
+.is-cinelite .stats__bg { inset: -14% 0; }
