@@ -1517,3 +1517,10 @@ html.lenis, html.lenis body { height: auto; }
   transform-origin: left;
 }
 .is-cinematic .products__progress { display: block; }
+
+/* Couches liées au scroll (scène 4) */
+/* Le tracé des séparateurs est scrubbé par GSAP, pas par la transition */
+.is-cinematic .divider span { transition: none; }
+/* Marge de débattement pour la parallaxe des fonds techniques */
+.is-cinematic .why__bg { inset: -14% 0; }
+.is-cinematic .stats__bg { inset: -14% 0; }
