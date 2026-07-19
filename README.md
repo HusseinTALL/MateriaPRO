@@ -1,9 +1,15 @@
 # MatériaPro — Site vitrine
 
 Site vitrine de MatériaPro, agence commerciale de matériaux de construction à
-Ouagadougou. Construit avec [Astro](https://astro.build), Anime.js et Lucide
-(icônes) — les deux bibliothèques sont bundlées, aucune dépendance CDN au
-runtime.
+Ouagadougou. Construit avec [Astro](https://astro.build). Toutes les
+bibliothèques sont bundlées, aucune dépendance CDN au runtime :
+
+- **Anime.js** — micro-interactions et révélations au scroll
+- **GSAP ScrollTrigger + Lenis** — mode cinématique desktop : défilement
+  inertiel et scènes épinglées pilotées par le scroll (héro, galerie
+  produits horizontale, plan de clôture). Mobile et
+  `prefers-reduced-motion` conservent l'expérience classique.
+- **Lucide** — icônes (sous-ensemble importé, tree-shaken)
 
 ## Développement
 
@@ -29,3 +35,4 @@ n'importe quel hébergement (GitHub Pages, Netlify, Vercel, serveur classique).
 - `src/components/` — une section par composant, contenu en tableaux de données
 - `src/styles/global.css` — design tokens et styles globaux
 - `src/scripts/main.js` — interactions et animations (Anime.js + icônes Lucide)
+- `src/scripts/cinematic.js` — scènes cinématiques desktop (GSAP + Lenis)

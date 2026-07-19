@@ -4,6 +4,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 import anime from "animejs";
+import { initCinematic } from "./cinematic.js";
 import {
   createIcons,
   ArrowUpRight,
@@ -279,8 +280,11 @@ function onScroll() {
   }
 
   if (!noMotion) {
-    // Parallax subtil du fond héro
-    if (scrollTop < window.innerHeight) {
+    // Parallax subtil du fond héro — géré par GSAP en mode cinématique
+    if (
+      scrollTop < window.innerHeight &&
+      !document.documentElement.classList.contains("is-cinematic")
+    ) {
       heroBg.style.transform = `translateY(${scrollTop * 0.25}px)`;
     }
 
@@ -335,7 +339,10 @@ function updateActiveLink() {
   let current = null;
 
   sections.forEach((section, i) => {
-    if (section.offsetTop <= fromTop) current = navLinks[i];
+    // getBoundingClientRect plutôt qu'offsetTop : reste juste quand une
+    // section est épinglée par ScrollTrigger (pin-spacer + position fixed)
+    const top = section.getBoundingClientRect().top + window.scrollY;
+    if (top <= fromTop) current = navLinks[i];
   });
 
   navLinks.forEach((l) => l.classList.toggle("is-active", l === current));
@@ -606,7 +613,12 @@ if (isDesktopPointer && !noMotion) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   14. ÉTAT INITIAL
+   14. MODE CINÉMATIQUE (desktop : Lenis + scènes GSAP)
+   ══════════════════════════════════════════════════════════ */
+initCinematic();
+
+/* ══════════════════════════════════════════════════════════
+   15. ÉTAT INITIAL
    ══════════════════════════════════════════════════════════ */
 updateActiveLink();
 onScroll();
