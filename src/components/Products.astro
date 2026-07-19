@@ -1,0 +1,78 @@
+---
+const products = [
+  {
+    icon: "layers",
+    title: "Tôles",
+    text: "Tôles bac 4 et 5 ondulations, prélaquées et galvanisées, bardage. Rouge, vert, bleu, marron, gris galva.",
+    wide: true,
+    image:
+      "https://images.unsplash.com/photo-1535732820275-9ffd998cac22?q=80&w=1600&auto=format&fit=crop",
+    imageAlt: "Tôles et bardage métallique",
+  },
+  {
+    icon: "git-commit-vertical",
+    title: "Tubes & profilés",
+    text: "Tubes carrés, rectangulaires, ronds et fer à béton pour vos structures.",
+  },
+  {
+    icon: "pipette",
+    title: "PVC",
+    text: "Tuyaux, gouttières, raccords et équipements de plomberie et d'assainissement.",
+  },
+  {
+    icon: "brick-wall",
+    title: "Briques & parpaings",
+    text: "Briques et parpaings selon disponibilité des usines partenaires.",
+  },
+  {
+    icon: "wrench",
+    title: "Quincaillerie lourde",
+    text: "Articles complémentaires pour équiper vos chantiers de bout en bout.",
+  },
+];
+---
+
+<!-- ══════════════ 3 · PRODUITS ══════════════ -->
+<section class="section products" id="produits">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow" data-reveal>Catalogue</p>
+        <h2 class="h2" data-split>Cinq familles de produits,<br />un seul interlocuteur.</h2>
+      </div>
+      <p class="section-head__note" data-reveal>
+        Coloris et références variés · longueurs standards ou sur mesure ·
+        devis personnalisé sous 24–48&nbsp;h.
+      </p>
+    </div>
+
+    <div class="products__grid">
+      {
+        products.map((p) => (
+          <article
+            class:list={["card", "product-card", { "product-card--wide": p.wide }]}
+            data-reveal
+          >
+            {p.image && (
+              <div class="product-card__img">
+                <img src={p.image} alt={p.imageAlt} loading="lazy" />
+              </div>
+            )}
+            <div class="product-card__body">
+              <i data-lucide={p.icon}></i>
+              <h3 set:html={p.title}></h3>
+              <p>{p.text}</p>
+              <span class="product-card__link">
+                Demander un devis <i data-lucide="arrow-up-right"></i>
+              </span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="products__progress" aria-hidden="true">
+      <span id="productsProgress"></span>
+    </div>
+  </div>
+</section>

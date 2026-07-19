@@ -1,0 +1,42 @@
+---
+const quotes = [
+  {
+    text: "Livré à l'heure, sans mauvaise surprise sur la qualité. Le contrôle avant livraison change tout sur nos chantiers.",
+    author: "Chef de chantier",
+    role: "Entreprise BTP · Ouagadougou",
+  },
+  {
+    text: "Un grossiste réactif avec plusieurs gammes au même endroit. Les tournées groupées simplifient notre réassort.",
+    author: "Gérant de quincaillerie",
+    role: "Revendeur · Zone industrielle",
+  },
+  {
+    text: "J'ai été guidé du devis à la livraison à domicile. Un seul contact, des prix clairs, transport inclus.",
+    author: "Particulier en construction",
+    role: "Maître d'ouvrage · Ouaga 2000",
+  },
+];
+---
+
+<!-- ══════════════ 9 · TÉMOIGNAGES ══════════════ -->
+<section class="section testimonials" id="temoignages">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Ils nous font confiance</p>
+    <h2 class="h2" data-split>Pensé pour les professionnels<br />du chantier et du négoce.</h2>
+
+    <div class="testimonials__grid">
+      {
+        quotes.map((q) => (
+          <figure class="card quote-card" data-reveal>
+            <i data-lucide="quote"></i>
+            <blockquote>«&nbsp;{q.text}&nbsp;»</blockquote>
+            <figcaption>
+              <strong>{q.author}</strong>
+              <span>{q.role}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

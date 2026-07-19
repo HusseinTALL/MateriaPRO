@@ -1,0 +1,48 @@
+---
+const links = [
+  { href: "#apropos", label: "À propos" },
+  { href: "#produits", label: "Produits" },
+  { href: "#services", label: "Services" },
+  { href: "#processus", label: "Comment ça marche" },
+  { href: "#zones", label: "Livraison" },
+  { href: "#contact", label: "Contact" },
+];
+
+const strip = ["red", "green", "blue", "brown", "galva"];
+---
+
+<!-- ══════════════ NAVBAR VERRE ══════════════ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#hero" class="nav__logo" data-magnetic>
+      Matéria<em>Pro</em>
+      <span class="nav__logo-tag">Agence Commerciale</span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Navigation principale">
+      {links.map((l) => <a href={l.href} class="nav__link">{l.label}</a>)}
+      <span class="nav__indicator" id="navIndicator" aria-hidden="true"></span>
+    </nav>
+
+    <a href="#contact" class="btn btn--gold nav__cta" data-magnetic>
+      Demander un devis
+      <i data-lucide="arrow-up-right"></i>
+    </a>
+
+    <button class="nav__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <!-- Bandeau coloris tôles — signature de marque -->
+  <div class="steel-strip" aria-hidden="true">
+    {strip.map((c) => <span class={`steel-strip__c steel-strip__c--${c}`}></span>)}
+  </div>
+</header>
+
+<!-- Menu mobile -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav aria-label="Navigation mobile">
+    {links.slice(0, 5).map((l) => <a href={l.href}>{l.label}</a>)}
+    <a href="#contact" class="mobile-menu__cta">Demander un devis</a>
+  </nav>
+</div>

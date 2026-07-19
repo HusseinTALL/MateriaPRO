@@ -1,0 +1,79 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const {
+  title = "MatériaPro — Agence Commerciale · Matériaux de Construction · Ouagadougou",
+  description = "MatériaPro, votre agence commerciale à Ouagadougou : tôles, tubes, PVC, briques et quincaillerie lourde — approvisionnement multi-usines, contrôle qualité et livraison sur chantier.",
+} = Astro.props;
+
+const heroImage =
+  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2400&auto=format&fit=crop";
+---
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0d1d38" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script is:inline>
+      document.documentElement.classList.remove("no-js");
+    </script>
+    <link rel="preload" as="image" href={heroImage} />
+
+    <!-- Google Fonts : Barlow Condensed (titres) + Archivo (corps) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Archivo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ══════════════ LOADER ══════════════ -->
+    <div class="loader" id="loader" aria-hidden="true">
+      <div class="loader__mark">
+        <span class="loader__word">Matéria<em>Pro</em></span>
+        <div class="loader__bar"><span class="loader__bar-fill" id="loaderBar"></span></div>
+        <span class="loader__pct" id="loaderPct" aria-hidden="true">0&nbsp;%</span>
+      </div>
+    </div>
+
+    <!-- ══════════════ CURSEUR PERSONNALISÉ (desktop) ══════════════ -->
+    <div class="cursor" id="cursor" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+    <!-- ══════════════ BARRE DE PROGRESSION SCROLL ══════════════ -->
+    <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+
+    <Nav />
+
+    <main id="main">
+      <slot />
+      <Footer />
+    </main>
+
+    <!-- ══════════════ BOUTON WHATSAPP FLOTTANT ══════════════ -->
+    <a
+      href="https://wa.me/226XXXXXXXX"
+      target="_blank"
+      rel="noopener"
+      class="whatsapp-fab"
+      id="whatsappFab"
+      aria-label="Nous écrire sur WhatsApp"
+    >
+      <i data-lucide="message-circle"></i>
+      <span class="whatsapp-fab__ring" aria-hidden="true"></span>
+    </a>
+
+    <script>
+      import "../scripts/main.js";
+    </script>
+  </body>
+</html>

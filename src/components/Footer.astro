@@ -1,0 +1,60 @@
+---
+const productLinks = [
+  "Tôles",
+  "Tubes & profilés",
+  "PVC",
+  "Briques & parpaings",
+  "Quincaillerie lourde",
+];
+
+const companyLinks = [
+  { href: "#apropos", label: "À propos" },
+  { href: "#services", label: "Services" },
+  { href: "#processus", label: "Comment ça marche" },
+  { href: "#partenaires", label: "Partenaires usines" },
+];
+
+const strip = ["red", "green", "blue", "brown", "galva"];
+const year = new Date().getFullYear();
+---
+
+<!-- ══════════════ 12 · FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="footer__logo">Matéria<em>Pro</em></span>
+        <p>
+          Agence commerciale indépendante · Matériaux de construction<br />
+          Ouagadougou — Burkina Faso
+        </p>
+        <div class="steel-strip steel-strip--footer" aria-hidden="true">
+          {strip.map((c) => <span class={`steel-strip__c steel-strip__c--${c}`}></span>)}
+        </div>
+      </div>
+
+      <nav class="footer__col" aria-label="Produits">
+        <h3>Produits</h3>
+        {productLinks.map((l) => <a href="#produits">{l}</a>)}
+      </nav>
+
+      <nav class="footer__col" aria-label="Entreprise">
+        <h3>Entreprise</h3>
+        {companyLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+      </nav>
+
+      <div class="footer__col">
+        <h3>Contact</h3>
+        <a href="tel:+226XXXXXXXX">+226 XX XX XX XX</a>
+        <a href="mailto:contact@materiapro.bf">contact@materiapro.bf</a>
+        <span>Lun–Ven 8h–18h · Sam 8h–13h</span>
+        <span>Ouagadougou, Burkina Faso</span>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© {year} MatériaPro — Agence Commerciale. Tous droits réservés.</span>
+      <span>RCCM / IFU : à compléter</span>
+    </div>
+  </div>
+</footer>

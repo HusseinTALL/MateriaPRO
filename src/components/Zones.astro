@@ -1,0 +1,47 @@
+---
+const zones = [
+  "Ouaga 2000",
+  "Zone industrielle",
+  "Tampouy",
+  "Dassasgho",
+  "Bissighin",
+  "Pissy",
+  "+ 8 autres zones",
+];
+---
+
+<!-- ══════════════ 7 · ZONES DE LIVRAISON ══════════════ -->
+<section class="section zones" id="zones">
+  <div class="container grid-2 grid-2--reverse">
+    <figure class="zones__media" data-reveal>
+      <div class="media-frame">
+        <img
+          src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1600&auto=format&fit=crop"
+          alt="Camion de livraison logistique industrielle"
+          loading="lazy"
+        />
+      </div>
+      <figcaption class="media-caption">
+        <span class="media-caption__num">14</span>
+        zones couvertes à Ouagadougou — régions sur devis.
+      </figcaption>
+    </figure>
+
+    <div>
+      <p class="eyebrow" data-reveal>Zone d'intervention</p>
+      <h2 class="h2" data-split>Ouagadougou en tournées planifiées, les régions sur devis.</h2>
+      <p class="lead" data-reveal>
+        Notre hub principal est à Ouagadougou. Les livraisons y sont
+        organisées par zone en tournées groupées ; l'enlèvement direct est
+        possible sur accord du fournisseur.
+      </p>
+      <div class="zones__tags">
+        {zones.map((z) => <span>{z}</span>)}
+      </div>
+      <a href="#contact" class="btn btn--navy" data-magnetic data-reveal>
+        Vérifier ma zone
+        <i data-lucide="map-pin"></i>
+      </a>
+    </div>
+  </div>
+</section>

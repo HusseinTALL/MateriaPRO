@@ -1,0 +1,47 @@
+---
+const pillars = [
+  {
+    index: "Multi-usines",
+    icon: "factory",
+    title: "Sourcing multi-usines",
+    text: "Accédez à plusieurs gammes et producteurs — CMP et autres fabricants locaux — via un seul interlocuteur commercial.",
+  },
+  {
+    index: "Qualité",
+    icon: "scan-search",
+    title: "Qualité contrôlée",
+    text: "Chaque lot est inspecté à l'enlèvement ou à réception : checklist par catégorie, photos, verdict conforme ou réserves.",
+  },
+  {
+    index: "Logistique",
+    icon: "truck",
+    title: "Livraison organisée",
+    text: "Transport planifié par zone, tournées groupées, bon de livraison signé à la réception sur chantier.",
+  },
+];
+---
+
+<!-- ══════════════ 4 · POURQUOI NOUS ══════════════ -->
+<section class="section why" id="pourquoi">
+  <div class="why__bg" aria-hidden="true"></div>
+  <div class="container">
+    <p class="eyebrow eyebrow--light" data-reveal>Pourquoi MatériaPro</p>
+    <h2 class="h2 h2--light" data-split>
+      Trois piliers, une promesse&nbsp;:<br />
+      moins de litiges, plus de chantiers livrés à l'heure.
+    </h2>
+
+    <div class="why__grid">
+      {
+        pillars.map((p) => (
+          <article class="glass-card" data-reveal>
+            <span class="glass-card__index">{p.index}</span>
+            <i data-lucide={p.icon}></i>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
