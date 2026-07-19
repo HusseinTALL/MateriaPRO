@@ -145,6 +145,98 @@ export function initCinematic() {
     }
   );
 
+  /* ── Scène 4 · COUCHES LIÉES AU SCROLL ───────────────────────
+     Micro-mouvements scrubbés en continu — chaque cible est choisie
+     pour ne jamais entrer en conflit avec les révélations one-shot
+     d'Anime.js (qui animent d'autres éléments). */
+
+  // Les grands titres dérivent lentement pendant leur traversée de
+  // l'écran ; les mots s'animent indépendamment à l'intérieur.
+  document.querySelectorAll("[data-split]").forEach((el) => {
+    if (el.closest(".products")) return; // section épinglée : déjà une scène
+    gsap.fromTo(
+      el,
+      { y: 48 },
+      {
+        y: -48,
+        ease: "none",
+        immediateRender: false,
+        scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+      }
+    );
+  });
+
+  // Les grands chiffres des légendes (FCQ, 14) remontent à
+  // contre-courant de leur image — effet de profondeur.
+  document.querySelectorAll(".media-caption__num").forEach((num) => {
+    gsap.fromTo(
+      num,
+      { yPercent: 60 },
+      {
+        yPercent: -60,
+        ease: "none",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: num.closest("figure") || num,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      }
+    );
+  });
+
+  // Les séparateurs se tracent au rythme exact du scroll
+  // (la transition CSS one-shot est désactivée en mode cinématique).
+  document.querySelectorAll(".divider span").forEach((line) => {
+    gsap.fromTo(
+      line,
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        ease: "none",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: line.parentElement,
+          start: "top 92%",
+          end: "top 45%",
+          scrub: true,
+        },
+      }
+    );
+  });
+
+  // Les fonds techniques (grille blueprint, halos) glissent plus
+  // lentement que leur section — parallaxe d'arrière-plan.
+  [
+    { el: ".why__bg", trigger: ".why" },
+    { el: ".stats__bg", trigger: ".stats" },
+  ].forEach(({ el, trigger }) => {
+    gsap.fromTo(
+      el,
+      { yPercent: -9 },
+      {
+        yPercent: 9,
+        ease: "none",
+        immediateRender: false,
+        scrollTrigger: { trigger, start: "top bottom", end: "bottom top", scrub: true },
+      }
+    );
+  });
+
+  // La grille de statistiques monte doucement pendant que la section
+  // défile (les compteurs one-shot vivent dans ses enfants).
+  gsap.fromTo(
+    ".stats__grid",
+    { y: 44 },
+    {
+      y: -24,
+      ease: "none",
+      immediateRender: false,
+      scrollTrigger: { trigger: ".stats", start: "top bottom", end: "bottom top", scrub: true },
+    }
+  );
+
   // Les dimensions bougent quand images et polices arrivent
   window.addEventListener("load", () => ScrollTrigger.refresh());
 }
